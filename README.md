@@ -1,8 +1,8 @@
 # KLASIFIKASI-GAMBAR
 
-# Intel Image Classification - Transfer Learning with MobileNetV2
+# Intel Image Classification - CNN
 
-Proyek ini merupakan implementasi **MobileNetV2** untuk melakukan klasifikasi gambar berdasarkan dataset **Intel Image Classification** dari Kaggle. Proyek ini melibatkan beberapa tahapan mulai dari pengunduhan dataset, preprocessing, training model, evaluasi, hingga konversi model ke berbagai format (TFLite dan TensorFlow.js).
+Proyek ini merupakan implementasi **CNN** untuk melakukan klasifikasi gambar berdasarkan dataset **Intel Image Classification** dari Kaggle. Proyek ini melibatkan beberapa tahapan mulai dari pengunduhan dataset, preprocessing, training model, evaluasi, hingga konversi model ke berbagai format (TFLite dan TensorFlow.js).
 
 ---
 
@@ -12,8 +12,8 @@ Proyek ini merupakan implementasi **MobileNetV2** untuk melakukan klasifikasi ga
 - Jumlah kelas: 6 (Buildings, Forest, Glacier, Mountain, Sea, Street)
 - Format gambar: RGB, resolusi 150x150 piksel
 - Dataset telah dibagi menjadi tiga bagian:
-  - `train` (14.000+ gambar)
-  - `test` (3.000+ gambar)
+  - `train` (11.000+ gambar)
+  - `test` (1.000+ gambar)
   - `val` (1.000+ gambar)
 
 ---
@@ -29,8 +29,8 @@ Proyek ini merupakan implementasi **MobileNetV2** untuk melakukan klasifikasi ga
 - Pembagian data: training (80%), validation (10%), test (10%)
 - Menerapkan **data augmentation**: rotasi, flip horizontal/vertikal, zoom, dan lainnya.
 
-### 3. Pembuatan Model dengan Transfer Learning (MobileNetV2)
-- Menggunakan arsitektur **MobileNetV2** pre-trained pada ImageNet sebagai feature extractor.
+### 3. Pembuatan Model CNN
+- Menggunakan arsitektur CNN pre-trained pada ImageNet sebagai feature extractor.
 - Bagian atas model (top classifier) ditambahkan layer `GlobalAveragePooling2D`, `Dropout`, dan `Dense`.
 - Base model dibekukan pada awalnya, lalu dilanjutkan dengan **fine-tuning** pada beberapa lapisan akhir.
 
@@ -39,15 +39,11 @@ Proyek ini merupakan implementasi **MobileNetV2** untuk melakukan klasifikasi ga
 - Model akan **dihentikan secara otomatis** jika akurasi validasi < 85% dalam beberapa epoch pertama, untuk menghemat waktu dan sumber daya.
 - Model terbaik disimpan otomatis.
 
-### 5. Fine-Tuning
-- Dilakukan untuk mencapai target akurasi > 90%
-- Teknik yang digunakan: penyesuaian learning rate, penambahan regularisasi, dan penambahan data augmentation.
-
-### 6. Evaluasi & Visualisasi
+### 5. Evaluasi & Visualisasi
 - Menampilkan **akurasi dan loss** untuk training dan validation.
 - Confusion matrix, classification report, dan contoh prediksi visual ditampilkan.
 
-### 7. Model Conversion
+### 6. Model Conversion
 - Model disimpan dalam format:
   - `SavedModel` (untuk deploy ke server)
   - `.tflite` (untuk deploy ke mobile)
@@ -58,12 +54,9 @@ Proyek ini merupakan implementasi **MobileNetV2** untuk melakukan klasifikasi ga
 
 ## ✅ Hasil dan Kesimpulan
 
-- Model berhasil mencapai akurasi **86%**, dan setelah fine-tuning berhasil menembus **>90% akurasi pada data validasi dan testing**.
+- Model berhasil mencapai akurasi **87%**.
 - Proses pelatihan dilakukan dengan mekanisme **early stopping**, sehingga efisien secara waktu dan komputasi.
 - Model telah dikonversi ke berbagai format untuk keperluan **multi-platform deployment** (mobile, web, server).
-- Penggunaan **MobileNetV2** sebagai backbone memungkinkan model untuk **belajar lebih cepat dan akurat** meskipun dengan data training yang relatif kecil.
-- Transfer learning terbukti sangat efektif untuk task klasifikasi citra yang kompleks dengan banyak kelas.
-
 
 ---
 
